@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get a Quote - Quotie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { scroll-behavior: smooth; }
+        .gradient-text { background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .gradient-button { background: linear-gradient(135deg, #0066ff 0%, #0050cc 100%); transition: all 0.3s ease; }
+        .gradient-button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 102, 255, 0.4); }
+        .glass-effect { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(0, 102, 255, 0.1); }
+        .form-input { background: white; border: 2px solid #e0e7ff; transition: all 0.3s ease; font-weight: 500; }
+        .form-input:focus { outline: none; border-color: #0066ff; box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1); }
+        
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        
+        .animate-slide-down { animation: slideDown 0.6s ease-out; }
+        .animate-slide-left { animation: slideInLeft 0.6s ease-out; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        
+        .form-section { opacity: 0; animation: slideDown 0.6s ease-out forwards; }
+        .form-section:nth-child(1) { animation-delay: 0s; }
+        .form-section:nth-child(2) { animation-delay: 0.15s; }
+        .form-section:nth-child(3) { animation-delay: 0.3s; }
+        .form-section:nth-child(4) { animation-delay: 0.45s; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50 text-slate-900">
+    <!-- Navigation -->
+    <nav class="glass-effect sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="/" class="flex items-center space-x-3 hover:opacity-80 transition">
+                    <div class="bg-blue-600 px-4 py-2 rounded-lg">
+                        <i class="fas fa-calculator text-xl text-white"></i>
+                    </div>
+                    <span class="text-3xl font-bold gradient-text">Quotie</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="/" class="px-4 py-2 rounded-lg text-slate-700 hover:bg-blue-100 transition font-medium">Home</a>
+                    <a href="/quote-form" class="gradient-button text-white px-8 py-2.5 rounded-lg font-semibold">Get Quote</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Section -->
+    <section class="flex items-center justify-center py-20 px-4 min-h-screen relative overflow-hidden">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute top-20 right-10 w-72 h-72 bg-blue-400 rounded-full blur-3xl opacity-10 animate-float"></div>
+            <div class="absolute bottom-20 left-10 w-72 h-72 bg-cyan-400 rounded-full blur-3xl opacity-10 animate-float" style="animation-delay: 1s;"></div>
+        </div>
+
+        <div class="w-full max-w-2xl relative z-10">
+            <div class="text-center mb-12 animate-slide-down">
+                <h1 class="text-5xl md:text-6xl font-black mb-4">
+                    <span class="gradient-text">Get Your Quote</span>
+                </h1>
+                <p class="text-xl text-slate-600 font-light">Fill in the details below to generate your fair, instant pricing estimate</p>
+            </div>
+            
+            <div class="glass-effect rounded-2xl shadow-2xl p-12 border-2 border-blue-100" style="animation: slideDown 0.6s ease-out 0.2s both;">
+                <form id="quoteForm" class="space-y-6">
+                    <!-- Job Type & Urgency -->
+                    <div class="grid md:grid-cols-2 gap-6 form-section">
+                        <div>
+                            <label class="block mb-3 font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fas fa-wrench text-blue-600"></i>
+                                Job Type
+                            </label>
+                            <select id="job_type" name="job_type" class="form-input w-full px-4 py-3 rounded-xl" required></select>
+                        </div>
+                        <div>
+                            <label class="block mb-3 font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fas fa-bolt text-orange-600"></i>
+                                Urgency Level
+                            </label>
+                            <select id="urgency" name="urgency" class="form-input w-full px-4 py-3 rounded-xl" required>
+                                <option value="normal">Normal (1x)</option>
+                                <option value="same_day">Same Day (+25%)</option>
+                                <option value="emergency">Emergency (+50%)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Job Description -->
+                    <div class="form-section">
+                        <label class="block mb-3 font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fas fa-pencil text-blue-600"></i>
+                            Job Description
+                        </label>
+                        <textarea id="job_description" name="job_description" rows="3" class="form-input w-full px-4 py-3 rounded-xl" placeholder="Describe the service needed in detail..." required></textarea>
+                    </div>
+
+                    <!-- Labor Hours & Distance -->
+                    <div class="grid md:grid-cols-2 gap-6 form-section">
+                        <div>
+                            <label class="block mb-3 font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fas fa-clock text-purple-600"></i>
+                                Estimated Labor Hours
+                            </label>
+                            <input type="number" id="labor_hours" name="labor_hours" min="0.5" max="100" step="0.5" value="2" class="form-input w-full px-4 py-3 rounded-xl" required>
+                        </div>
+                        <div>
+                            <label class="block mb-3 font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fas fa-road text-green-600"></i>
+                                Distance to Supplier (km)
+                            </label>
+                            <input type="number" id="distance_km" name="distance_km" min="0" max="500" step="1" value="10" class="form-input w-full px-4 py-3 rounded-xl" required>
+                        </div>
+                    </div>
+
+                    <!-- Location Section -->
+                    <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 form-section">
+                        <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2 text-lg">
+                            <i class="fas fa-map-marker-alt text-blue-600"></i>
+                            Client Location
+                        </h3>
+                        <div class="space-y-3">
+                            <input type="text" id="street_address" name="street_address" placeholder="Street Address" class="form-input w-full px-4 py-3 rounded-xl" required>
+                            <div class="grid md:grid-cols-3 gap-3">
+                                <input type="text" id="city" name="city" placeholder="City" class="form-input w-full px-4 py-3 rounded-xl" required>
+                                <select id="state" name="state" class="form-input w-full px-4 py-3 rounded-xl" required></select>
+                                <input type="text" id="zip_code" name="zip_code" placeholder="ZIP Code" maxlength="10" class="form-input w-full px-4 py-3 rounded-xl" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Material Prices Section -->
+                    <div class="bg-green-50 border-2 border-green-200 rounded-xl p-6 form-section">
+                        <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2 text-lg">
+                            <i class="fas fa-shopping-cart text-green-600"></i>
+                            Material Prices (JSON)
+                        </h3>
+                        <textarea id="material_prices_json" name="material_prices_json" rows="2" class="form-input w-full px-4 py-3 rounded-xl font-mono text-sm" placeholder='{"Home Depot": 460, "Lowes": 420, "Amazon": 480}' required></textarea>
+                        <p class="text-sm text-slate-600 mt-3 font-light">
+                            <i class="fas fa-info-circle mr-2 text-blue-600"></i>Format: {"Supplier Name": price, ...}
+                        </p>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="gradient-button text-white w-full py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 mt-8 hover:shadow-2xl transform hover:scale-105 transition form-section">
+                        <i class="fas fa-calculator"></i>
+                        Calculate My Quote
+                    </button>
+                </form>
+
+                <!-- Error Message -->
+                <div id="formError" class="text-red-600 mt-6 text-center hidden font-semibold bg-red-50 p-4 rounded-xl border-2 border-red-200 animate-slide-down">
+                    <i class="fas fa-exclamation-circle mr-2"></i><span id="errorText"></span>
+                </div>
+            </div>
+
+            <!-- Tips Section -->
+            <div class="mt-12 glass-effect rounded-2xl p-8 border-2 border-slate-200" style="animation: slideDown 0.6s ease-out 0.4s both;">
+                <h3 class="text-lg font-bold mb-6 text-slate-900">
+                    <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>Pricing Tips
+                </h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-900 mb-2">Material Prices</p>
+                        <p class="text-xs text-slate-600 font-light">Quotie selects the lowest supplier automatically for the best value</p>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-900 mb-2">Labor Rates</p>
+                        <p class="text-xs text-slate-600 font-light">Based on real market data and state labor standards</p>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-900 mb-2">Transparency</p>
+                        <p class="text-xs text-slate-600 font-light">Every component of your quote is clearly broken down</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Populate job types
+        fetch('/api/job-types').then(r => r.json()).then(data => {
+            const sel = document.getElementById('job_type');
+            data.job_types.forEach(jt => {
+                const opt = document.createElement('option');
+                opt.value = jt;
+                opt.textContent = jt.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                sel.appendChild(opt);
+            });
+        });
+
+        // Populate states
+        fetch('/api/states').then(r => r.json()).then(data => {
+            const sel = document.getElementById('state');
+            data.states.forEach(st => {
+                const opt = document.createElement('option');
+                opt.value = st;
+                opt.textContent = st;
+                sel.appendChild(opt);
+            });
+        });
+
+        // Form submission
+        document.getElementById('quoteForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            document.getElementById('formError').classList.add('hidden');
+
+            let material_prices_json = document.getElementById('material_prices_json').value;
+            let material_prices;
+
+            try {
+                material_prices = JSON.parse(material_prices_json);
+            } catch {
+                document.getElementById('errorText').textContent = 'Invalid material prices JSON. Please use format: {"Supplier": price, ...}';
+                document.getElementById('formError').classList.remove('hidden');
+                return;
+            }
+
+            const payload = {
+                job_type: document.getElementById('job_type').value,
+                job_description: document.getElementById('job_description').value,
+                urgency: document.getElementById('urgency').value,
+                labor_hours: document.getElementById('labor_hours').value,
+                state: document.getElementById('state').value,
+                zip_code: document.getElementById('zip_code').value,
+                city: document.getElementById('city').value,
+                street_address: document.getElementById('street_address').value,
+                distance_km: document.getElementById('distance_km').value,
+                material_prices: material_prices
+            };
+
+            const res = await fetch('/api/calculate-quote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await res.json();
+            if(res.ok) {
+                sessionStorage.setItem('quote_result', JSON.stringify(data));
+                window.location.href = '/quote-result';
+            } else {
+                document.getElementById('errorText').textContent = data.error || 'An error occurred. Please try again.';
+                document.getElementById('formError').classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Result - Quotie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { scroll-behavior: smooth; }
+        .gradient-text { background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .gradient-button { background: linear-gradient(135deg, #0066ff 0%, #0050cc 100%); transition: all 0.3s ease; }
+        .gradient-button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 102, 255, 0.4); }
+        .glass-effect { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(0, 102, 255, 0.1); }
+        .price-card { background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: slideUp 0.6s ease-out; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50 text-slate-900">
+    <nav class="glass-effect sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3 group cursor-pointer">
+                    <div class="bg-blue-600 px-4 py-2 rounded-lg">
+                        <i class="fas fa-calculator text-xl text-white"></i>
+                    </div>
+                    <span class="text-3xl font-bold gradient-text">Quotie</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="/" class="px-4 py-2 rounded-lg text-slate-700 hover:bg-blue-100 transition font-medium">Home</a>
+                    <a href="/quote-form" class="gradient-button text-white px-8 py-2.5 rounded-lg font-semibold">Get Quote</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="flex items-center justify-center py-20 px-4 min-h-screen">
+        <div class="w-full max-w-2xl">
+            <div class="text-center mb-12">
+                <h1 class="text-5xl md:text-6xl font-black mb-4">
+                    <span class="gradient-text">Your Quote</span>
+                </h1>
+                <p class="text-xl text-slate-600 font-light">Review your fair, transparent pricing breakdown</p>
+            </div>
+
+            <div class="animate-in">
+                <!-- Price Card -->
+                <div class="price-card rounded-2xl shadow-2xl p-12 text-white mb-8">
+                    <p class="text-white text-opacity-90 mb-2 font-light">Total Client Price</p>
+                    <div class="text-6xl md:text-7xl font-black mb-2" id="clientPrice">$0</div>
+                    <p class="text-white text-opacity-80 font-light">Ready to accept this quote?</p>
+                </div>
+
+                <!-- Details Grid -->
+                <div class="glass-effect rounded-2xl shadow-2xl p-12 border-2 border-blue-100">
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <!-- Left Column -->
+                        <div class="space-y-6">
+                            <div class="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
+                                <p class="text-slate-600 font-light text-sm mb-2">Technician Payout</p>
+                                <p class="text-3xl font-bold text-blue-600" id="techPayout">$0</p>
+                            </div>
+                            <div class="bg-green-50 rounded-xl p-6 border-2 border-green-200">
+                                <p class="text-slate-600 font-light text-sm mb-2">Material Cost</p>
+                                <p class="text-2xl font-bold text-green-600" id="materialCost">$0</p>
+                                <p class="text-sm text-slate-600 font-light mt-2" id="materialSource">-</p>
+                            </div>
+                            <div class="bg-purple-50 rounded-xl p-6 border-2 border-purple-200">
+                                <p class="text-slate-600 font-light text-sm mb-2">Labor Cost</p>
+                                <p class="text-2xl font-bold text-purple-600" id="laborCost">$0</p>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="space-y-6">
+                            <div class="bg-orange-50 rounded-xl p-6 border-2 border-orange-200">
+                                <p class="text-slate-600 font-light text-sm mb-2">Logistics Cost</p>
+                                <p class="text-2xl font-bold text-orange-600" id="logisticsCost">$0</p>
+                            </div>
+                            <div class="bg-pink-50 rounded-xl p-6 border-2 border-pink-200">
+                                <p class="text-slate-600 font-light text-sm mb-2">Platform Margin</p>
+                                <p class="text-2xl font-bold text-pink-600" id="platformMargin">$0</p>
+                            </div>
+                            <div class="bg-indigo-50 rounded-xl p-6 border-2 border-indigo-200">
+                                <p class="text-slate-600 font-light text-sm mb-2">Confidence Level</p>
+                                <p class="text-lg font-bold text-indigo-600" id="confidence">-</p>
+                                <p class="text-xs text-slate-600 font-light mt-2" id="approvalStatus">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Breakdown Table -->
+                    <div class="border-t-2 border-blue-200 pt-8">
+                        <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                            <i class="fas fa-receipt text-blue-600"></i>
+                            Detailed Breakdown
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                                <span class="text-slate-700 font-medium">Technician Payout</span>
+                                <span class="text-slate-900 font-bold" id="breakdown-tech">$0</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                                <span class="text-slate-700 font-medium">Materials</span>
+                                <span class="text-slate-900 font-bold" id="breakdown-material">$0</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                                <span class="text-slate-700 font-medium">Labor</span>
+                                <span class="text-slate-900 font-bold" id="breakdown-labor">$0</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                                <span class="text-slate-700 font-medium">Logistics</span>
+                                <span class="text-slate-900 font-bold" id="breakdown-logistics">$0</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-blue-100 rounded-lg border-2 border-blue-200">
+                                <span class="text-slate-900 font-bold">Platform Margin</span>
+                                <span class="text-blue-600 font-bold text-lg" id="breakdown-margin">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 flex flex-col sm:flex-row gap-6">
+                    <a href="/quote-form" class="gradient-button text-white px-8 py-4 rounded-xl font-bold text-lg flex-1 flex items-center justify-center gap-2">
+                        <i class="fas fa-refresh"></i>Get Another Quote
+                    </a>
+                    <button onclick="window.print()" class="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-xl font-bold text-lg flex-1 flex items-center justify-center gap-2 hover:bg-blue-50 transition">
+                        <i class="fas fa-print"></i>Print Quote
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const result = JSON.parse(sessionStorage.getItem('quote_result') || '{}');
+        if(result && result.client_price){
+            document.getElementById('clientPrice').textContent = '$' + result.client_price.toLocaleString();
+            document.getElementById('techPayout').textContent = '$' + result.technician_payout.toLocaleString();
+            document.getElementById('materialCost').textContent = '$' + result.material_cost.toLocaleString();
+            document.getElementById('laborCost').textContent = '$' + result.labor_cost.toLocaleString();
+            document.getElementById('logisticsCost').textContent = '$' + result.logistics_cost.toLocaleString();
+            document.getElementById('platformMargin').textContent = '$' + result.platform_margin.toLocaleString();
+            document.getElementById('materialSource').textContent = 'From: ' + result.material_source;
+            document.getElementById('confidence').textContent = result.pricing_confidence.charAt(0).toUpperCase() + result.pricing_confidence.slice(1);
+            document.getElementById('approvalStatus').textContent = result.approval_required ? '⚠️ Approval Required' : '✅ Ready to Go';
+            
+            document.getElementById('breakdown-tech').textContent = '$' + result.technician_payout.toLocaleString();
+            document.getElementById('breakdown-material').textContent = '$' + result.material_cost.toLocaleString();
+            document.getElementById('breakdown-labor').textContent = '$' + result.labor_cost.toLocaleString();
+            document.getElementById('breakdown-logistics').textContent = '$' + result.logistics_cost.toLocaleString();
+            document.getElementById('breakdown-margin').textContent = '$' + result.platform_margin.toLocaleString();
+        } else {
+            document.body.innerHTML = '<div class="h-screen flex items-center justify-center"><div class="text-center"><i class="fas fa-exclamation-triangle text-5xl text-red-500 mb-4"></i><p class="text-2xl font-bold text-slate-900 mb-4">No quote data found</p><p class="text-slate-600 mb-8">Please generate a quote first</p><a href="/quote-form" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-bold">Get Started</a></div></div>';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotie - Fair Home Services Pricing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { scroll-behavior: smooth; }
+        .gradient-text { background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .gradient-button { background: linear-gradient(135deg, #0066ff 0%, #0050cc 100%); transition: all 0.3s ease; }
+        .gradient-button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 102, 255, 0.4); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 102, 255, 0.15); }
+        .feature-icon { background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); padding: 20px; border-radius: 15px; }
+        .glass-effect { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(0, 102, 255, 0.1); }
+        
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgba(0, 102, 255, 0.4); } 50% { box-shadow: 0 0 40px rgba(0, 102, 255, 0.7); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-glow { animation: glow 2s ease-in-out infinite; }
+        .animate-slide-down { animation: slideDown 0.6s ease-out; }
+        .animate-slide-left { animation: slideInLeft 0.6s ease-out; }
+        .animate-fade-in { animation: fadeIn 0.8s ease-out; }
+        .animate-bounce-slow { animation: bounce 2s ease-in-out infinite; }
+        
+        .flow-item { opacity: 0; animation: slideDown 0.6s ease-out forwards; }
+        .flow-item:nth-child(1) { animation-delay: 0s; }
+        .flow-item:nth-child(2) { animation-delay: 0.2s; }
+        .flow-item:nth-child(3) { animation-delay: 0.4s; }
+        .flow-item:nth-child(4) { animation-delay: 0.6s; }
+        
+        .price-component { opacity: 0; animation: slideInLeft 0.5s ease-out forwards; }
+        .price-component:nth-child(1) { animation-delay: 0s; }
+        .price-component:nth-child(2) { animation-delay: 0.15s; }
+        .price-component:nth-child(3) { animation-delay: 0.3s; }
+        .price-component:nth-child(4) { animation-delay: 0.45s; }
+        .price-component:nth-child(5) { animation-delay: 0.6s; }
+        
+        .interactive-box { cursor: pointer; transition: all 0.3s ease; }
+        .interactive-box:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50 text-slate-900">
+    
+    <!-- Navigation -->
+    <nav class="glass-effect sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-calculator text-xl text-white"></i>
+                    </div>
+                    <span class="text-3xl font-bold gradient-text">Quotie</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="#features" class="px-4 py-2 rounded-lg text-slate-700 hover:bg-blue-100 transition font-medium">Features</a>
+                    <a href="#demo" class="px-4 py-2 rounded-lg text-slate-700 hover:bg-blue-100 transition font-medium">How It Works</a>
+                    <a href="#benefits" class="px-4 py-2 rounded-lg text-slate-700 hover:bg-blue-100 transition font-medium">Benefits</a>
+                    <a href="/quote-form" class="gradient-button text-white px-8 py-2.5 rounded-lg font-semibold ml-4">Get Quote</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Visualization -->
+    <section class="relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full blur-3xl opacity-20 animate-float"></div>
+            <div class="absolute bottom-20 right-10 w-72 h-72 bg-cyan-400 rounded-full blur-3xl opacity-20 animate-float" style="animation-delay: 1s;"></div>
+            <div class="absolute top-1/2 left-1/3 w-96 h-96 bg-blue-300 rounded-full blur-3xl opacity-10 animate-float" style="animation-delay: 2s;"></div>
+        </div>
+
+        <div class="max-w-6xl mx-auto text-center relative z-10">
+            <div class="inline-block mb-8 px-6 py-3 bg-blue-100 rounded-full border-2 border-blue-200 animate-bounce-slow">
+                <span class="text-sm font-bold text-blue-700 flex items-center justify-center gap-2">
+                    <i class="fas fa-star animate-pulse"></i>Fair Pricing Engine
+                </span>
+            </div>
+
+            <h1 class="text-6xl md:text-8xl font-black mb-8 leading-tight animate-slide-down">
+                <span class="gradient-text block">Transparent Pricing</span>
+                <span class="text-slate-900">That Actually Works</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl text-slate-600 mb-12 leading-relaxed max-w-3xl mx-auto font-light animate-slide-down" style="animation-delay: 0.2s;">
+                Stop guessing. Our AI-powered engine calculates fair home services quotes using real labor economics, supplier pricing, and market data across all 50 U.S. states.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-6 justify-center mb-16 animate-slide-down" style="animation-delay: 0.4s;">
+                <a href="/quote-form" class="gradient-button text-white px-10 py-5 rounded-xl font-bold text-lg flex items-center justify-center gap-3 hover:shadow-2xl group">
+                    <i class="fas fa-zap"></i>Get Your Quote
+                    <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                </a>
+                <a href="#demo" class="border-2 border-blue-600 bg-white px-10 py-5 rounded-xl font-bold text-lg text-blue-600 hover:bg-blue-50 transition flex items-center justify-center gap-2">
+                    <i class="fas fa-play"></i>See It In Action
+                </a>
+            </div>
+
+            <!-- Quick Calculator Preview -->
+            <div class="glass-effect rounded-2xl p-8 md:p-12 border-2 border-blue-100 animate-fade-in max-w-2xl mx-auto" style="animation-delay: 0.6s;">
+                <h3 class="text-xl font-bold mb-8 text-slate-900">Try It Now (Example)</h3>
+                <div class="grid md:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 border-2 border-blue-200 flow-item">
+                        <i class="fas fa-tools text-3xl text-blue-600 mb-3"></i>
+                        <p class="text-sm text-slate-600 font-light">Plumbing</p>
+                        <p class="font-bold text-slate-900">$32/hr</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 border-2 border-green-200 flow-item">
+                        <i class="fas fa-map-marker-alt text-3xl text-green-600 mb-3"></i>
+                        <p class="text-sm text-slate-600 font-light">California</p>
+                        <p class="font-bold text-slate-900">Market Rate</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-6 border-2 border-purple-200 flow-item">
+                        <i class="fas fa-clock text-3xl text-purple-600 mb-3"></i>
+                        <p class="text-sm text-slate-600 font-light">Labor Hours</p>
+                        <p class="font-bold text-slate-900">3 Hours</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3 mb-8 text-left max-w-md mx-auto">
+                    <div class="flex items-center gap-3 price-component">
+                        <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">+</div>
+                        <span class="flex-1 text-slate-700 font-medium">Labor: $32 × 1.2 × 3h</span>
+                        <span class="font-bold text-blue-600">$115</span>
+                    </div>
+                    <div class="flex items-center gap-3 price-component">
+                        <div class="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center font-bold text-sm">+</div>
+                        <span class="flex-1 text-slate-700 font-medium">Materials (Best)</span>
+                        <span class="font-bold text-green-600">$420</span>
+                    </div>
+                    <div class="flex items-center gap-3 price-component">
+                        <div class="w-10 h-10 rounded-full bg-orange-600 text-white flex items-center justify-center font-bold text-sm">+</div>
+                        <span class="flex-1 text-slate-700 font-medium">Logistics (5km)</span>
+                        <span class="font-bold text-orange-600">$53</span>
+                    </div>
+                    <div class="h-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent my-4"></div>
+                    <div class="flex items-center gap-3 price-component" style="animation-delay: 0.75s;">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-cyan-600 text-white flex items-center justify-center font-bold">$</div>
+                        <span class="flex-1 text-slate-900 font-bold text-lg">Client Price</span>
+                        <span class="text-3xl font-black text-blue-600">$755</span>
+                    </div>
+                </div>
+
+                <p class="text-sm text-slate-600 font-light">✨ Calculated instantly with complete fairness guarantee</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="py-32 px-4 bg-gradient-to-b from-blue-50 to-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl md:text-6xl font-black mb-6">
+                    <span class="gradient-text">How the Magic Happens</span>
+                </h2>
+                <p class="text-xl text-slate-600 max-w-2xl mx-auto font-light">
+                    Watch how we calculate fair pricing in real-time
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Left: Inputs -->
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-8">You Input</h3>
+                    
+                    <div class="interactive-box bg-white rounded-xl p-6 border-2 border-blue-200 hover:border-blue-600 hover:shadow-lg">
+                        <div class="flex items-center gap-4">
+                            <i class="fas fa-briefcase text-2xl text-blue-600"></i>
+                            <div>
+                                <p class="text-sm text-slate-600 font-light">Service Type</p>
+                                <p class="font-bold text-slate-900">Electrical Work</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interactive-box bg-white rounded-xl p-6 border-2 border-green-200 hover:border-green-600 hover:shadow-lg">
+                        <div class="flex items-center gap-4">
+                            <i class="fas fa-map-pin text-2xl text-green-600"></i>
+                            <div>
+                                <p class="text-sm text-slate-600 font-light">Location</p>
+                                <p class="font-bold text-slate-900">Texas (TX)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interactive-box bg-white rounded-xl p-6 border-2 border-purple-200 hover:border-purple-600 hover:shadow-lg">
+                        <div class="flex items-center gap-4">
+                            <i class="fas fa-hourglass text-2xl text-purple-600"></i>
+                            <div>
+                                <p class="text-sm text-slate-600 font-light">Duration</p>
+                                <p class="font-bold text-slate-900">4 Hours</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interactive-box bg-white rounded-xl p-6 border-2 border-orange-200 hover:border-orange-600 hover:shadow-lg">
+                        <div class="flex items-center gap-4">
+                            <i class="fas fa-shopping-bag text-2xl text-orange-600"></i>
+                            <div>
+                                <p class="text-sm text-slate-600 font-light">Materials</p>
+                                <p class="font-bold text-slate-900">$380 (Best)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Calculation -->
+                <div class="space-y-8">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-8">We Calculate</h3>
+                    
+                    <div class="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl p-8 text-white shadow-2xl">
+                        <h4 class="text-lg font-bold mb-6 flex items-center gap-2">
+                            <i class="fas fa-cog animate-spin" style="animation-duration: 3s;"></i>
+                            Quotie Pricing Engine
+                        </h4>
+
+                        <div class="space-y-4 mb-6">
+                            <div class="flex justify-between items-center text-sm">
+                                <span class="opacity-90">Base Rate (Texas)</span>
+                                <span class="font-bold">$29/hr</span>
+                            </div>
+                            <div class="flex justify-between items-center text-sm">
+                                <span class="opacity-90">Job Complexity (×1.3)</span>
+                                <span class="font-bold">Electrical</span>
+                            </div>
+                            <div class="flex justify-between items-center text-sm">
+                                <span class="opacity-90">Hours × Rate</span>
+                                <span class="font-bold">4 × $37.70</span>
+                            </div>
+                            <div class="border-t border-white border-opacity-30 pt-4 flex justify-between items-center font-bold">
+                                <span>Subtotal</span>
+                                <span>$630</span>
+                            </div>
+                        </div>
+
+                        <p class="text-sm opacity-75">✨ 50 states • Real rates • Dynamic pricing</p>
+                    </div>
+
+                    <div class="glass-effect rounded-2xl p-8 border-2 border-blue-100">
+                        <p class="text-sm text-slate-600 font-light mb-2">Final Quote</p>
+                        <p class="text-5xl font-black gradient-text">$890</p>
+                        <p class="text-xs text-slate-600 mt-4 font-light">
+                            ✓ Tech: $605 (68%) | Materials: $380 | Logistics: $45 | Platform: $160 (20%)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-32 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl md:text-6xl font-black mb-6">
+                    <span class="gradient-text">Why Quotie Wins</span>
+                </h2>
+                <p class="text-xl text-slate-600 max-w-2xl mx-auto font-light">
+                    Built with fairness. Powered by data. Trusted by professionals.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-hover glass-effect p-10 rounded-2xl border-2 border-blue-100">
+                    <div class="feature-icon w-fit mb-6 animate-glow">
+                        <i class="fas fa-globe text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-900">Real-Time Labor Rates</h3>
+                    <p class="text-slate-600 font-light leading-relaxed">All 50 states with live market data. No guessing.</p>
+                    <div class="mt-6 text-3xl font-black text-blue-600">50</div>
+                    <p class="text-xs text-slate-600 font-light">US States Covered</p>
+                </div>
+
+                <div class="card-hover glass-effect p-10 rounded-2xl border-2 border-blue-100">
+                    <div class="feature-icon w-fit mb-6 animate-glow" style="animation-delay: 0.3s;">
+                        <i class="fas fa-calculator text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-900">Instant Calculations</h3>
+                    <p class="text-slate-600 font-light leading-relaxed">All components computed in milliseconds.</p>
+                    <div class="mt-6 text-3xl font-black text-blue-600">&lt;100ms</div>
+                    <p class="text-xs text-slate-600 font-light">Response Time</p>
+                </div>
+
+                <div class="card-hover glass-effect p-10 rounded-2xl border-2 border-blue-100">
+                    <div class="feature-icon w-fit mb-6 animate-glow" style="animation-delay: 0.6s;">
+                        <i class="fas fa-handshake text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-900">Fair Payouts</h3>
+                    <p class="text-slate-600 font-light leading-relaxed">Technicians earn 65-75% of labor revenue always.</p>
+                    <div class="mt-6 text-3xl font-black text-green-600">70%</div>
+                    <p class="text-xs text-slate-600 font-light">Average Payout</p>
+                </div>
+
+                <div class="card-hover glass-effect p-10 rounded-2xl border-2 border-blue-100">
+                    <div class="feature-icon w-fit mb-6 animate-glow">
+                        <i class="fas fa-bolt text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-900">Urgency Pricing</h3>
+                    <p class="text-slate-600 font-light leading-relaxed">Normal → Same-day → Emergency multipliers.</p>
+                    <div class="mt-6 flex gap-2 justify-center">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">1x</span>
+                        <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-bold">1.25x</span>
+                        <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold">1.5x</span>
+                    </div>
+                </div>
+
+                <div class="card-hover glass-effect p-10 rounded-2xl border-2 border-blue-100">
+                    <div class="feature-icon w-fit mb-6 animate-glow" style="animation-delay: 0.3s;">
+                        <i class="fas fa-lock text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-900">100% Transparent</h3>
+                    <p class="text-slate-600 font-light leading-relaxed">Every component visible and explained.</p>
+                    <div class="mt-6 space-y-1 text-xs">
+                        <p><span class="font-bold text-slate-900">✓</span> Labor breakdown</p>
+                        <p><span class="font-bold text-slate-900">✓</span> Material sources</p>
+                        <p><span class="font-bold text-slate-900">✓</span> Logistics cost</p>
+                    </div>
+                </div>
+
+                <div class="card-hover glass-effect p-10 rounded-2xl border-2 border-blue-100">
+                    <div class="feature-icon w-fit mb-6 animate-glow" style="animation-delay: 0.6s;">
+                        <i class="fas fa-tools text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-900">15+ Job Types</h3>
+                    <p class="text-slate-600 font-light leading-relaxed">Plumbing, electrical, HVAC, roofing, and more.</p>
+                    <div class="mt-6 grid grid-cols-3 gap-2 text-xs">
+                        <span class="px-2 py-1 bg-slate-100 rounded text-slate-700 font-medium">Plumbing</span>
+                        <span class="px-2 py-1 bg-slate-100 rounded text-slate-700 font-medium">Electrical</span>
+                        <span class="px-2 py-1 bg-slate-100 rounded text-slate-700 font-medium">HVAC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="py-32 px-4 bg-gradient-to-b from-white to-blue-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl md:text-6xl font-black mb-6">
+                    <span class="gradient-text">Built for Everyone</span>
+                </h2>
+                <p class="text-xl text-slate-600 max-w-2xl mx-auto font-light">
+                    Creating better outcomes for clients and technicians
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="card-hover glass-effect p-12 rounded-2xl border-2 border-blue-100">
+                    <h3 class="text-3xl font-bold mb-8 text-slate-900">
+                        <i class="fas fa-users text-blue-600 mr-3"></i>For Clients
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-4">
+                            <i class="fas fa-check text-green-500 text-xl font-bold"></i>
+                            <span class="text-slate-700 font-medium">Fair, market-based pricing</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <i class="fas fa-check text-green-500 text-xl font-bold"></i>
+                            <span class="text-slate-700 font-medium">No hidden fees</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <i class="fas fa-check text-green-500 text-xl font-bold"></i>
+                            <span class="text-slate-700 font-medium">Instant quotes</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <i class="fas fa-check text-green-500 text-xl font-bold"></i>
+                            <span class="text-slate-700 font-medium">Detailed breakdown</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <i class="fas fa-check text-green-500 text-xl font-bold"></i>
+                            <span class="text-slate-700 font-medium">Complete transparency</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card-hover glass-effect p-12 rounded-2xl border-2 border-blue-100">
+                    <h3 class="text-3xl font-bold mb-8 text-slate-900">
+                        <i class="fas fa-wrench text-blue-600 mr-3"></i>For Technicians
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-4">
+                            <i class="fas fa-check text-green-500 text-xl font-bold"></i>
+                            <span class="text-slate-700 font-medium">65-75% guaranteed payout</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <i class="fas fa-check text-green-500 text-xl font-bold"></i>
+                            <span class="text-slate-700 font-medium">Consistent compensation</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <i class="fas fa-check text-green-500 text-xl font-bold"></i>
+                            <span class="text-slate-700 font-medium">Clear specifications</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <i class="fas fa-check text-green-500 text-xl font-bold"></i>
+                            <span class="text-slate-700 font-medium">Less negotiation time</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <i class="fas fa-check text-green-500 text-xl font-bold"></i>
+                            <span class="text-slate-700 font-medium">Growing opportunities</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-32 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-400 rounded-full opacity-5 blur-3xl animate-float"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-400 rounded-full opacity-5 blur-3xl animate-float" style="animation-delay: 1s;"></div>
+        </div>
+        <div class="max-w-4xl mx-auto bg-gradient-to-br from-blue-600 to-cyan-600 rounded-3xl p-16 text-center shadow-2xl relative z-10">
+            <h2 class="text-5xl md:text-6xl font-black mb-6 text-white">Ready to Get Started?</h2>
+            <p class="text-xl mb-10 text-white text-opacity-90 font-light">Generate your first fair, transparent home services quote in seconds.</p>
+            <a href="/quote-form" class="bg-white text-blue-600 px-12 py-4 rounded-xl font-bold text-lg hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center gap-2">
+                <i class="fas fa-arrow-right"></i>Get Your Quote Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-16 px-4 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-5 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="bg-blue-600 px-4 py-2 rounded-lg">
+                            <i class="fas fa-calculator text-xl text-white"></i>
+                        </div>
+                        <span class="text-2xl font-bold text-white">Quotie</span>
+                    </div>
+                    <p class="text-slate-400 font-light">Fair pricing engine for home services across America.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 text-white">Product</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition font-light">Pricing</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition font-light">Features</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition font-light">Documentation</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition font-light">API</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 text-white">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition font-light">About</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition font-light">Blog</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition font-light">Careers</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition font-light">Press</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 text-white">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition font-light">Privacy</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition font-light">Terms</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition font-light">Security</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition font-light">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 text-white">Follow Us</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-800 hover:bg-blue-600 transition flex items-center justify-center text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-800 hover:bg-blue-600 transition flex items-center justify-center text-white"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-800 hover:bg-blue-600 transition flex items-center justify-center text-white"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 text-center">
+                <p class="text-slate-500 font-light">&copy; 2025 Quotie. All rights reserved. Fair pricing for home services across all 50 U.S. states.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
