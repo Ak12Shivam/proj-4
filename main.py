@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 import math
 import os
-
+from waitress import serve
 # Get the directory where this script is located
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -246,4 +246,9 @@ def internal_error(e):
     return jsonify({"error": "Internal server error"}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, host='localhost', port=5000)
+    # For production, use Waitress WSGI server
+    print("Starting production server on ")
+    serve(app, host='0.0.0.0', port=5000)
+    
+    # For development only, uncomment the line below and comment out the serve() call above:
+    # app.run(debug=True, host='localhost', port=5000)
